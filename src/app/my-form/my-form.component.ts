@@ -32,29 +32,53 @@ export class MyFormComponent implements OnInit {
       var children = element.childNodes;
       // loop the child node of ng-content 
       children.forEach(function(item){
-        if(item.type == "text" && item.name !=="")
-          // extracting values 
-         result[item.name]= item.value;
+        if(item.name){
+
+         if(item.hasChildNodes()){
+           var grandChildernValues = {}
+         
+          //  loop children of childNode 
+          for(var i = 0; i < item.length; i++){
+            grandChildernValues[item[i].name] =item[i].value;
+          }
+           result[item.name] = grandChildernValues;
+          }else{
+            result[item.name]= item.value;
+          }
+        }
       });
-      // console.log(result)
 
     }
 
 
     // function to get form values at any time 
     myFormValue(){
-      var result = {}
-       // native element access 
-       var element = this.content.nativeElement;
-       // selection of child element
-       var children = element.childNodes;
-       // loop the child node of ng-content 
-       children.forEach(function(item){
-         if(item.type == "text" && item.name !=="")
-           // extracting values 
-           result[item.name]= item.value;
-       });
-       return result;
+
+      let result = {}
+      // native element access 
+      var element = this.content.nativeElement;
+      // selection of child element
+      var children = element.childNodes;
+      // loop the child node of ng-content 
+      children.forEach(function(item){
+        if(item.name){
+
+         if(item.hasChildNodes()){
+
+            var grandChildernValues = {}
+            //  loop children of childNode 
+            for(var i = 0; i < item.length; i++){
+              grandChildernValues[item[i].name] =item[i].value;
+            }
+            result[item.name] = grandChildernValues;
+
+          }else{
+            result[item.name]= item.value;
+          }
+        }
+      });
+
+      return result;
 
     }
 
@@ -65,6 +89,7 @@ export class MyFormComponent implements OnInit {
       // updating form data in FormDataServices 
       this.formDataService.setFormValues(data);
       // event to notify parent about value change 
-      this.change.emit(data)
+      // console.log(data)
+      this.change.emit(data);
     }
 }
