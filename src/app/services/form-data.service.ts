@@ -11,6 +11,7 @@ export class FormDataService {
 
 
   // getter will return form data 
+  // can get values of form any where in the by calling FormDataService  
   get formValues(){
     return this.formData;
   }
