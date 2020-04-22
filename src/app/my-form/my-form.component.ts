@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, EventEmitter, Input, ContentChild, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, ElementRef, EventEmitter, Input, ContentChild, ViewChild, Output, ContentChildren, ViewChildren } from '@angular/core';
 import { FormDataService } from '../services/form-data.service';
 
 @Component({
@@ -10,6 +10,9 @@ export class MyFormComponent implements OnInit {
 
   result = {}
   @ViewChild('contentWrapper') content: ElementRef;
+
+  // @ViewChildren('contentWrapper') vc;
+
   @Output() change = new EventEmitter();
 
   constructor(
@@ -24,30 +27,16 @@ export class MyFormComponent implements OnInit {
   
 
     ngAfterViewInit() {
-
+      
       let result = {}
-      // native element access 
-      var element = this.content.nativeElement;
-      // selection of child element
-      var children = element.childNodes;
-      // loop the child node of ng-content 
-      children.forEach(function(item){
+      let inputs = this.content.nativeElement.getElementsByTagName("input");
+
+      for (const item of inputs){
         if(item.name){
-
-         if(item.hasChildNodes()){
-           var grandChildernValues = {}
-         
-          //  loop children of childNode 
-          for(var i = 0; i < item.length; i++){
-            grandChildernValues[item[i].name] =item[i].value;
-          }
-           result[item.name] = grandChildernValues;
-          }else{
-            result[item.name]= item.value;
-          }
+          result[item.name]= item.value;
         }
-      });
-
+      }
+      // console.log(result);
     }
 
 
@@ -55,28 +44,13 @@ export class MyFormComponent implements OnInit {
     myFormValue(){
 
       let result = {}
-      // native element access 
-      var element = this.content.nativeElement;
-      // selection of child element
-      var children = element.childNodes;
-      // loop the child node of ng-content 
-      children.forEach(function(item){
+      let inputs = this.content.nativeElement.getElementsByTagName("input");
+
+      for (const item of inputs){
         if(item.name){
-
-         if(item.hasChildNodes()){
-
-            var grandChildernValues = {}
-            //  loop children of childNode 
-            for(var i = 0; i < item.length; i++){
-              grandChildernValues[item[i].name] =item[i].value;
-            }
-            result[item.name] = grandChildernValues;
-
-          }else{
-            result[item.name]= item.value;
-          }
+          result[item.name]= item.value;
         }
-      });
+      }
 
       return result;
 
