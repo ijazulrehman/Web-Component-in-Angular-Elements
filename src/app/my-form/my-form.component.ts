@@ -29,7 +29,9 @@ export class MyFormComponent implements OnInit {
     ngAfterViewInit() {
       
       let result = {}
-      let inputs = this.content.nativeElement.getElementsByTagName("input");
+      let inputs = [];
+      inputs = Array.prototype.concat.apply(inputs, this.content.nativeElement.getElementsByTagName("input"));
+      inputs = Array.prototype.concat.apply(inputs, this.content.nativeElement.getElementsByTagName("select"));
 
       for (const item of inputs){
         if(item.name){
@@ -44,8 +46,11 @@ export class MyFormComponent implements OnInit {
     myFormValue(){
 
       let result = {}
-      let inputs = this.content.nativeElement.getElementsByTagName("input");
+      let inputs = [];
+      inputs = Array.prototype.concat.apply(inputs, this.content.nativeElement.getElementsByTagName("input"));
+      inputs = Array.prototype.concat.apply(inputs, this.content.nativeElement.getElementsByTagName("select"));
 
+      console.log(inputs);
       for (const item of inputs){
         if(item.name){
           result[item.name]= item.value;
