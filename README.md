@@ -9,10 +9,10 @@ Simple custom Angular web-component, receive html elements within `<ng-content>`
     <input type="hidden" name="input2" value="2"> 
   </my-form>
   ```
-  It has a public function that return `formvalues` in services and change event that return `json value` onchange event to parent element 
-  `
+  It has a public function that return `formvalues` in services and change event that return `json` value on change event to parent element 
+  ```sh
   { value1 : "1", value2 :"2" }
-  `
+  ```
 
 ## Development server
 
