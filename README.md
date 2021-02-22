@@ -2,13 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
-Simple custom Angular web-component, receive html elements within <ng-content> and a function to return the FormData json of this. Example: the custom element name my-form 
-  `<my-form><br>
-    <input type="text" name="name01" value="1"> <br>
-    <input type="hidden" name="name01" value="2"> <br>
-  </my-form>`
-  It has a public function that return fomvalues in services and change event that return json value on change to parent element 
-  { "name01": "1", "name02":"2" }
+Simple custom Angular web-component, receive html elements within `<ng-content>` and a function to return the FormData json of this. Example: the custom element name my-form 
+  ```sh
+  <my-form>
+    <input type="text" name="input1" value="1"> 
+    <input type="hidden" name="input2" value="2"> 
+  </my-form>
+  ```
+  It has a public function that return `formvalues` in services and change event that return `json value` onchange event to parent element 
+  `
+  { value1 : "1", value2 :"2" }
+  `
 
 ## Development server
 
